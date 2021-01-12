@@ -81,7 +81,7 @@ namespace CabiNet
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Browse_Source_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new FolderBrowserDialog();
             dialog.ShowDialog();
@@ -89,7 +89,7 @@ namespace CabiNet
             SourcePath = dialog.SelectedPath;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Browse_Target_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new FolderBrowserDialog();
             dialog.ShowDialog();
@@ -97,7 +97,7 @@ namespace CabiNet
             TargetPath = dialog.SelectedPath;
         }
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Start_Click(object sender, RoutedEventArgs e)
         {
             IsBusy = true;
             var archive = Path.Combine(TargetPath, ArchiveName);
@@ -105,7 +105,7 @@ namespace CabiNet
             try
             {
                 // Create the file, or overwrite if the file exists.
-                File.Create(archive).Close();
+                File.Create(archive).Dispose();
             }
             catch (Exception ex)
             {
@@ -126,26 +126,29 @@ namespace CabiNet
                 }
             });
 
+            IsBusy = false;
+
             if (_isSuccess)
             {
                 System.Windows.MessageBox.Show("Successfully created cabinet!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-            IsBusy = false;
+            else
+            {
+                System.Windows.MessageBox.Show("Oops something went wrong!", "Failure", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void Subfolder_Checked(object sender, RoutedEventArgs e)
         {
             _includeSubFolders = true;
         }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void Subfolder_Unchecked(object sender, RoutedEventArgs e)
         {
             _includeSubFolders = false;
         }
 
-        private void Hyperlink_RequestNavigate(object sender,
-                                       System.Windows.Navigation.RequestNavigateEventArgs e)
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
         }
@@ -154,6 +157,7 @@ namespace CabiNet
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = !string.IsNullOrEmpty(SourcePath) && !string.IsNullOrEmpty(TargetPath) && !string.IsNullOrEmpty(ArchiveName) && !IsBusy;

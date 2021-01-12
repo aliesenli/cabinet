@@ -24,7 +24,7 @@
                 <Binding Path="SourcePath"  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </TextBox.Text>
         </TextBox>
-        <Button Content="Browse..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="98" Height="23" Click="Button_Click" BorderThickness="10,1,1,1" Grid.Column="2"/>
+        <Button Content="Browse..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="98" Height="23" Click="Browse_Source_Click" BorderThickness="10,1,1,1" Grid.Column="2"/>
 
         <Label Content="Target Path:" HorizontalAlignment="Left" Margin="5,72,0,0" VerticalAlignment="Top" Height="26" Width="72"/>
         <TextBox HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,98,10,0" Grid.Column="0" Grid.ColumnSpan="2">
@@ -32,7 +32,7 @@
                 <Binding Path="TargetPath" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </TextBox.Text>
         </TextBox>
-        <Button Content="Browse..." HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="98" Height="23" Click="Button_Click_1" BorderThickness="10,1,1,1" Grid.Column="2"/>
+        <Button Content="Browse..." HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="98" Height="23" Click="Browse_Target_Click" BorderThickness="10,1,1,1" Grid.Column="2"/>
 
         <Label Content="File Name:" HorizontalAlignment="Left" Margin="5,139,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
         <TextBox HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,165,10,0" Grid.Column="0">
@@ -40,11 +40,11 @@
                 <Binding Path="ArchiveName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </TextBox.Text>
         </TextBox>
-        <CheckBox Content="Include Subfolders" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="123" Height="23" Grid.Column="1" Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked"/>
+        <CheckBox Content="Include Subfolders" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="123" Height="23" Grid.Column="1" Unchecked="Subfolder_Unchecked" Checked="Subfolder_Checked"/>
 
-        <Button Content="Start" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="98" Height="23" Click="Button_Click_2" BorderThickness="10,0,1,1" Grid.Column="2" Command="Save">
+        <Button Content="Start" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="98" Height="23" Click="Start_Click" BorderThickness="10,0,1,1" Grid.Column="2" Command="Save">
             <Button.CommandBindings>
-                <CommandBinding Command="Save" Executed="Button_Click_2" CanExecute="Save_CanExecute"/>
+                <CommandBinding Command="Save" Executed="Start_Click" CanExecute="Save_CanExecute"/>
             </Button.CommandBindings>
         </Button>
 
